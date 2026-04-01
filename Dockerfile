@@ -1,8 +1,8 @@
 FROM php:8.2
 
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev libcurl4-openssl-dev nginx \
-    && docker-php-ext-install pdo pdo_mysql mbstring xml ctype fileinfo dom curl zip iconv gd \
+    git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev zlib1g-dev libjpeg-dev libcurl4-openssl-dev nginx \
+    && docker-php-ext-install pdo pdo_mysql  mbstring xml ctype fileinfo dom curl zip iconv gd  \
     && apt-get clean
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
