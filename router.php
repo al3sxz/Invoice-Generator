@@ -2,7 +2,6 @@
 
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-
 if (strpos($uri, '/storage/') === 0) {
     $filePath = __DIR__ . '/storage/app/public' . substr($uri, 8);
     if (file_exists($filePath) && is_file($filePath)) {
@@ -14,8 +13,6 @@ if (strpos($uri, '/storage/') === 0) {
             'gif' => 'image/gif',
             'svg' => 'image/svg+xml',
             'pdf' => 'application/pdf',
-            'woff' => 'font/woff',
-            'woff2' => 'font/woff2',
         ];
         if (isset($types[$ext])) {
             header('Content-Type: ' . $types[$ext]);
@@ -25,7 +22,6 @@ if (strpos($uri, '/storage/') === 0) {
         exit;
     }
 }
-
 
 if ($uri !== '/' && file_exists(__DIR__ . '/public' . $uri)) {
     $ext = pathinfo($uri, PATHINFO_EXTENSION);
