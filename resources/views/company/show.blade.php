@@ -9,6 +9,7 @@
               <div class="flex items-start gap-4">
                 <div>
                   <img class="w-16 h-16 rounded-md" src={{ $company->logo ?? 'https://www.w3schools.com/howto/img_avatar.png' }}>
+               <img class="w-16 h-16 rounded-md" src={{ echo asset($company->logo); ?? 'https://www.w3schools.com/howto/img_avatar.png' }}>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-2">
