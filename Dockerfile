@@ -20,9 +20,10 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction
 RUN mkdir -p /app/storage/app/public && \
     chmod -R 775 /app/storage/app/public && \
     chown -R www-data:www-data /app/storage/app/public
-RUN php artisan storage:link
+RUN rm -f /app/public/storage 2>/dev/null || true
 RUN chown -R www-data:www-data /app/public/storage
 RUN npm install && npm run build
+
 
 COPY nginx.conf /etc/nginx/sites-available/default
 
