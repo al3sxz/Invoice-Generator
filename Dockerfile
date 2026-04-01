@@ -19,9 +19,9 @@ COPY . .
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 RUN mkdir -p /app/storage/app/public && \
     chmod -R 775 /app/storage/app/public && \
-    chown -R www-data:www-data /app/storage/app/public
-RUN rm -f /app/public/storage 2>/dev/null || true
-RUN chown -R www-data:www-data /app/public/storage
+    chown -R www-data:www-data /app/storage/app/public && \
+    rm -f /app/public/storage 2>/dev/null || true
+
 RUN npm install && npm run build
 
 
