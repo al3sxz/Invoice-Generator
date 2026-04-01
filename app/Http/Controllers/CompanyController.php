@@ -39,13 +39,14 @@ class CompanyController extends Controller
             $image = Image::read($upload);
 
             $filename = Str::random() . '.' . $upload->getClientOriginalExtension();
-      
-            Storage::put(
+            $encoded = $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 70)->toString();
+
+            Storage::disk('public')->put(
                 $filename,
-                $image->encodeByExtension($upload->getClientOriginalExtension(), quality: 70)
+                $encoded
             );
-      
-            $url = Storage::url($filename);
+
+            $url = Storage::disk('public')->url($filename);
         }
 
 
