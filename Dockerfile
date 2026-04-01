@@ -17,6 +17,7 @@ WORKDIR /app
 COPY . .
 
 RUN composer install --optimize-autoloader --no-dev --no-interaction
+RUN php artisan storage:link
 RUN npm install && npm run build
 
 COPY nginx.conf /etc/nginx/sites-available/default
