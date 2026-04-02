@@ -1,10 +1,18 @@
 <x-dashboard-layout>
+
+    @if (session('error'))
+            <div class="nx-alert mb-2" style="background:rgba(244,63,94,0.06);border-color:rgba(244,63,94,0.2);color:#f43f5e">
+              <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div><p class="font-semibold" style="font-family:Syne,sans-serif">Delete failed</p><p class="text-sm mt-0.5" style="color:#9898b0">{{ session("error") }}</p></div>
+            </div>
+     @endif
+
   @if (session('message'))
           <div class="nx-alert mb-4" style="background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2);color:#10b981">
               <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               <div><p class="font-semibold" style="font-family:Syne,sans-serif">System Message:</p><p class="text-sm mt-0.5" style="color:#9898b0">{{ session("message") }}</p></div>
             </div>
-@endif
+  @endif
     <section id="services_section">
     <div class="nx-table-wrap">
     <div class="flex justify-between nx-table-toolbar" >

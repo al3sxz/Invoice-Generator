@@ -66,6 +66,9 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
+        if ($service->invoices()->exists()) {
+            return back()->with("error", "This service have invoice associated.");
+        }
         $service->delete();
         return redirect("/dashboard/services")->with("message", "Service deleted successfully");
     }

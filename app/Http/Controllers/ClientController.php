@@ -7,16 +7,18 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-     public function index() {
-       $clients = Client::query()->paginate(12);
-       return view("clients.index", compact("clients"));
+    public function index()
+    {
+        $clients = Client::query()->paginate(12);
+        return view("clients.index", compact("clients"));
     }
 
-    public function create() {
+    public function create()
+    {
         return view("clients.create");
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $attributes = request()->validate([
             'name' => ['required'],
@@ -26,24 +28,26 @@ class ClientController extends Controller
             'email' => ['required', 'email']
         ]);
 
-      Client::create($attributes);
+        Client::create($attributes);
 
-     return redirect("/dashboard/clients")->with("message", "Client created successfully");
-
+        return redirect("/dashboard/clients")->with("message", "Client created successfully");
     }
 
-    public function show(Client $client) {
-      
-      return view("clients.show", compact("client"));
+    public function show(Client $client)
+    {
+
+        return view("clients.show", compact("client"));
     }
 
-     public function edit(Client $client) {
-          return view("clients.edit", ['client'=> $client]);
+    public function edit(Client $client)
+    {
+        return view("clients.edit", ['client' => $client]);
     }
 
-     public function update(Client $client) {
+    public function update(Client $client)
+    {
 
-         request()->validate([
+        request()->validate([
             'name' => ['required'],
             'DNI'      => ['required'],
             'address'   => ['required'],
@@ -62,14 +66,20 @@ class ClientController extends Controller
         return redirect("/dashboard/clients")->with("message", "Client updated successfully");
     }
 
-    public function destroy(Client $client) {
-          $client->delete();
-          return redirect("/dashboard/clients")->with("message", "Client deleted successfully");
+    public function destroy(Client $client)
+    {
+        if ($client->invoices()->exists()) {
+            return back()->with("error", "This client have invoice associated.");
+        }
+
+        $client->delete();
+        return redirect("/dashboard/clients")->with("message", "Client deleted successfully");
     }
 
-    public function search(Client $client) {
-      $clientName = request()->query("client");
-      $clients = Client::query()->where("name", "LIKE", "$clientName%")->paginate(10);
-      return view("clients.index", compact("clients"));
+    public function search(Client $client)
+    {
+        $clientName = request()->query("client");
+        $clients = Client::query()->where("name", "LIKE", "$clientName%")->paginate(10);
+        return view("clients.index", compact("clients"));
     }
 }
