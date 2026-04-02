@@ -62,7 +62,7 @@ class InvoiceController extends Controller
             ]);
         }
 
-        return redirect('/dashboard/invoices');
+        return redirect('/dashboard/invoices')->with("message", "Invoice created successfully");
     }
 
     public function show(Invoice $invoice) {
