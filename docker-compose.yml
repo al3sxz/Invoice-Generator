@@ -1,0 +1,45 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    restart: unless-stopped
+    command: php -S 0.0.0.0:8000 -t /app/public
+    env_file:
+      - docker/local.env
+    volumes:
+      - .:/app                        
+      - /app/vendor                     
+      - /app/node_modules               
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - laravel_network
+
+  db:
+    image: mariadb:11
+    container_name: laravel_db
+    restart: unless-stopped
+    env_file:
+      - docker/local.env
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "laravel", "-psecret"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - laravel_network
+
+volumes:
+  db_data:
+
+networks:
+  laravel_network:
+    driver: bridge

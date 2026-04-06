@@ -1,0 +1,6 @@
+.env
+docker/local.env
+docker/prod.env
+node_modules
+vendor
+.git
