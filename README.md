@@ -18,6 +18,12 @@ A web-based invoice management system built for small businesses. Create clients
 
 ---
 
+## Important notes:
+- This is a demo, not a live service.
+- It is not optimized for mobile, as that was not the goal of the project.
+
+---
+
 ## Screenshots
 
 | Dashboard | Create Invoice |
