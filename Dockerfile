@@ -25,3 +25,5 @@ RUN mkdir -p /app/storage/app/public && \
 RUN npm install && npm run build
 
 EXPOSE 8000
+
+CMD php -S 0.0.0.0:${PORT:-8000} -t /app/public /app/router.php & php artisan migrate --force && php artisan db:seed --force && php artisan storage:link && wait
