@@ -38,7 +38,7 @@
        </div>
 
           <div>
-                <label class="block text-xs font-semibold text-ghost mb-2" style="font-family:Syne,sans-serif;letter-spacing:0.04em">Expiration Date</label>
+            <label class="block text-xs font-semibold text-ghost mb-2" style="font-family:Syne,sans-serif;letter-spacing:0.04em">Expiration Date</label>
           <input class="nx-input" name="expiration_date" type="date">
          </div>
 
@@ -142,7 +142,7 @@
   }
 
   function onServiceChange(select, id) {
-    // Llena el precio automáticamente al elegir servicio
+   
     const selectedOption = select.options[select.selectedIndex];
     const price = selectedOption.getAttribute('data-price') || 0;
     document.getElementById(`price-${id}`).value = price;
@@ -191,7 +191,7 @@
     document.getElementById('display-tax-value').textContent = formatCurrency(taxVal);
     document.getElementById('display-total').textContent = formatCurrency(total);
 
-    // Campos hidden que se envían al controller
+    
     document.getElementById('hidden-subtotal').value  = subtotal.toFixed(2);
     document.getElementById('hidden-tax-value').value = taxVal.toFixed(2);
     document.getElementById('hidden-total').value     = total.toFixed(2);
@@ -203,7 +203,7 @@
 
   document.getElementById("add-service-btn").addEventListener("click", addRow);
 
-  // Arranca con 1 fila por defecto
+  
   addRow();
 </script>
 
