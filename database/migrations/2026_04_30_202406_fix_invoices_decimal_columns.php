@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->decimal('tax_value', 10, 2)->change();
+            $table->decimal('final_value', 10, 2)->change();
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        //
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->integer('tax_value')->change();
+            $table->integer('final_value')->change();
+        });
     }
 };
