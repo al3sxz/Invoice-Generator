@@ -19,9 +19,9 @@ return new class extends Migration
             $table->enum("status", ["PENDING", "PAID", "CANCELED", "OVERDUE", "DRAFT"]);
             $table->string("notes")->nullable();
             $table->decimal('sub_total', 10, 2);
-            $table->integer("tax_value");
+            $table->decimal('tax_value', 10, 2);
+            $table->decimal('final_value', 10, 2);
             $table->integer("tax_percentage");
-            $table->integer("final_value");
             $table->timestamps();
         });
     }
